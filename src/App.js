@@ -1,26 +1,40 @@
+/* eslint no-undef: 0 */
 import React from 'react';
-import logo from './logo.svg';
+import $ from 'jquery';
 import './App.css';
+// Apollo
+import { gql } from 'apollo-boost';
+import { useQuery } from '@apollo/react-hooks';
+import * as queries from './graphql/queries';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const searchCustomersQuery = gql(queries.search.searchCustomers.graphql);
+
+const App = () => {
+  // DATA BINDING
+  const { loading, error, data } = useQuery(searchCustomersQuery);
+
+  if (loading) return <div>Loading</div>;
+  if (error) return <div>Error: {JSON.stringify(error)}</div>;
+
+  if (data) {
+    if (!$.isEmptyObject(data.searchCustomers)) {
+      return (
+        <div>
+          <a>
+            {e => {
+              searchCustomers({
+                variables: {
+                  cursor:0,
+                  count:15
+                }
+              })
+            }}
+          </a>
+            we have search results
+        </div>
+      );
+    }
+  }
 }
 
 export default App;
