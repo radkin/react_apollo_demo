@@ -35,7 +35,10 @@ const App = () => {
                 {data.searchCustomers.edges.map(({ node }) => (
                   <tr key={node.name}>
                     <td>{node.name}</td>
-                    <td>${node.baselinePrice}</td> 
+                    <td>${node.baselinePrice}</td>
+                    {locations.map(location =>
+                      <td key={location}>${node.locations[location].price}</td>
+                    )}
                   </tr>
                 ))}
 
