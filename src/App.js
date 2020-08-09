@@ -32,10 +32,13 @@ const App = () => {
             </thead>
             <tbody>
 
-              <tr>
-                <td></td>
-                <td></td>
-              </tr>
+                {data.searchCustomers.edges.map(({ node }) => (
+                  <tr key={node.name}>
+                    <td>{node.name}</td>
+                    <td>${node.baselinePrice}</td> 
+                  </tr>
+                ))}
+
 
             </tbody>
           </table>
