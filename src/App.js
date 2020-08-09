@@ -10,24 +10,23 @@ import * as queries from './graphql/queries';
 const searchCustomersQuery = gql(queries.search.searchCustomers.graphql);
 
 const App = () => {
+  const locations = ['NYC', 'SFO', 'LAX'];
   // DATA BINDING
-  const { loading, error, data } = useQuery(searchCustomersQuery);
-
+  const { data, loading, error } = useQuery(searchCustomersQuery);
   if (loading) return <div>Loading</div>;
   if (error) return <div>Error: {JSON.stringify(error)}</div>;
-
   if (data) {
     if (!$.isEmptyObject(data.searchCustomers)) {
-      return(
-        <ul>
-         { data.searchCustomers.edges.map(edge =>
-           <li
-             key={edge.id}>
-             {edge.node.name}
-           </li> )
-         }
-        </ul>
-      )
+      return (
+        <div>
+          <ul>
+            <h2>customers</h2>
+            {data.searchCustomers.edges.map(({ node }) => (
+              <li key={node.name}>{node.name}</li>
+            ))}
+          </ul>
+        </div>
+      );
     }
   }
 }
