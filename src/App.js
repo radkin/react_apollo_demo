@@ -18,23 +18,36 @@ const App = () => {
 
   if (data) {
     if (!$.isEmptyObject(data.searchCustomers)) {
-      return (
-        <div>
-          <a>
-            {e => {
-              searchCustomers({
-                variables: {
-                  cursor:0,
-                  count:15
-                }
-              })
-            }}
-          </a>
-            we have search results
-        </div>
-      );
+      return(
+        <ul>
+         { data.searchCustomers.edges.map(edge =>
+           <li
+             key={edge.id}>
+             {edge.node.name}
+           </li> )
+         }
+        </ul>
+      )
     }
   }
 }
 
 export default App;
+
+/*
+return (
+  <div>
+    <a>
+      {e => {
+        searchCustomers({
+          variables: {
+            cursor:0,
+            count:15
+          }
+        })
+      }}
+    </a>
+      we have search results
+  </div>
+);
+*/
