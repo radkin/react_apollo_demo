@@ -2,6 +2,7 @@
 import React from 'react';
 import $ from 'jquery';
 import './App.css';
+
 // Apollo
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
@@ -19,12 +20,25 @@ const App = () => {
     if (!$.isEmptyObject(data.searchCustomers)) {
       return (
         <div>
-          <ul>
-            <h2>customers</h2>
-            {data.searchCustomers.edges.map(({ node }) => (
-              <li key={node.name}>{node.name}</li>
-            ))}
-          </ul>
+          <table className="table table-hover table-bordered table-info">
+            <thead className="thead-dark">
+              <tr>
+                <th>Customer / Department</th>
+                <th>Baseline</th>
+                {locations.map(location =>
+                  <th key={location}>{location}</th>
+                )}
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr>
+                <td></td>
+                <td></td>
+              </tr>
+
+            </tbody>
+          </table>
         </div>
       );
     }
@@ -32,21 +46,3 @@ const App = () => {
 }
 
 export default App;
-
-/*
-return (
-  <div>
-    <a>
-      {e => {
-        searchCustomers({
-          variables: {
-            cursor:0,
-            count:15
-          }
-        })
-      }}
-    </a>
-      we have search results
-  </div>
-);
-*/
