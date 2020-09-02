@@ -2,7 +2,7 @@
 import React from 'react';
 import $ from 'jquery';
 import './App.css';
-
+import ReactPaginate from 'react-paginate';
 // Apollo
 import { gql } from 'apollo-boost';
 import { useQuery } from '@apollo/react-hooks';
@@ -12,6 +12,11 @@ const searchCustomersQuery = gql(queries.search.searchCustomers.graphql);
 
 const App = () => {
   const locations = ['NYC', 'SFO', 'LAX'];
+
+  function handlePageChange() {
+    console.log('handle page change here');
+  }
+
   // DATA BINDING
   const { data, loading, error } = useQuery(searchCustomersQuery);
   if (loading) return <div>Loading</div>;
@@ -45,6 +50,16 @@ const App = () => {
 
             </tbody>
           </table>
+          <ReactPaginate
+            pageCount={data.searchCustomers.pageInfo.total}
+            pageRangeDisplayed={5}
+            marginPagesDisplayed={2}
+            previousLabel={'previous'}
+            nextLabel={'next'}
+            breakLabel={'...'}
+            initialPage={0}
+            onPageChange={handlePageChange()}
+          />
         </div>
       );
     }
