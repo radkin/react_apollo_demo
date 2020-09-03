@@ -5,6 +5,7 @@ script:
   - echo "Deploying"
 #  - npm run test
 #  - npm run coverage
+  - npm install
   - npm run build
 install:
   - npm install -g firebase-tools
