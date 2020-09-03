@@ -2,11 +2,12 @@
 
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { Root, Routes } from 'react-static';
+// import { Root, Routes } from 'react-static';
+import { Root } from 'react-static';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+// import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import localStorage from 'localStorage';
 // apollo
