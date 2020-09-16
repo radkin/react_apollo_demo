@@ -2,11 +2,12 @@
 
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { Root, Routes } from 'react-static';
+// import { Root, Routes } from 'react-static';
+import { Root } from 'react-static';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+// import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import localStorage from 'localStorage';
 // apollo
@@ -23,9 +24,9 @@ const init = async () => {
   const server = process.env.REACT_APP_APOLLO_SERVER;
   const port = process.env.REACT_APP_PORTNUM;
   // set up protocol
-  let transferProtocol = 'https';
+  let uri = `https://${server}/graphql`;
   if (process.env.REACT_APP_PORTNUM) {
-    transferProtocol = 'http';
+    uri = `https://${server}:${port}/graphql`;
   }
   // persist cache in Apollo
   const cache = new InMemoryCache();
@@ -50,7 +51,7 @@ const init = async () => {
       return forward(operation);
     }).concat(
       new HttpLink({
-        uri: `${transferProtocol}://${server}:${port}/graphql`,
+        uri: uri,
         credentials: 'same-origin',
         resolvers: {},
       })
