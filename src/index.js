@@ -22,12 +22,6 @@ import { ApolloProvider } from '@apollo/react-hooks';
 
 const init = async () => {
   const server = process.env.REACT_APP_APOLLO_SERVER;
-  const port = process.env.REACT_APP_PORTNUM;
-  // set up protocol
-  let uri = `https://${server}/graphql`;
-  if (process.env.REACT_APP_PORTNUM) {
-    uri = `https://${server}:${port}/graphql`;
-  }
   // persist cache in Apollo
   const cache = new InMemoryCache();
   const persistCache = new PersistCache({
@@ -51,7 +45,7 @@ const init = async () => {
       return forward(operation);
     }).concat(
       new HttpLink({
-        uri: uri,
+        uri: server,
         credentials: 'same-origin',
         resolvers: {},
       })
