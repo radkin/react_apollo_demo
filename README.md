@@ -25,5 +25,21 @@ on the command-line (tmux is good).
 * Jest/Enzyme Tests
 For local laptop: `npm run test`
 
+## Very Important!
+The .env file is not tracked in github, but it needs to have the correct values
+For Production to use _Firebase_ at compile time. _Amplify_ has environment variables defined in the UI while Heroku has environment variables best defined on the command-line using the CLI. **development** .env looks like this:
+```bash
+REACT_APP_PORTNUM='9000'
+REACT_APP_APOLLO_SERVER='localhost'
+REACT_APP_ENV='development'
+```
+Production looks like this:
+```bash
+REACT_APP_ENV='production'
+REACT_APP_APOLLO_SERVER= < SUPER SECRET SERVER NAME >
+```
+
+It is possible that _Amplify_ will work fine without using environment variables defined in the UI, perhaps compiling with .env will work. This has not been tested.
+
 ## Author
 radkin@github.com (not a proper email address)
